@@ -1,10 +1,11 @@
 import React from 'react'
+import Body from './component/body/Body'
 
 const App = () => {
   return (
-    <div className='font-bold '>
-      Lets play  Holi
-    </div>
+    <>
+    <Body/>
+    </>
   )
 }
 
