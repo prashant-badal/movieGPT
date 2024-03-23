@@ -1,10 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react'
 import Header from '../header/Header'
 import { checkValidate } from '../utils/validate';
-import {  createUserWithEmailAndPassword } from "firebase/auth";
+import {  createUserWithEmailAndPassword,signInWithEmailAndPassword } from "firebase/auth";
 import {auth} from '../utils/firebase'
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
+  const navigate=useNavigate();
   const [errMes,setErrMsg]=useState(null)
 
   const email=useRef(null);
@@ -22,13 +24,20 @@ const Login = () => {
       const message =checkValidate(email.current.value,password.current.value);
       console.log(message)
       setErrMsg(message )
-      console.log(password.current.value)
-      if(message)return ;
+      // console.log(password.current.value)
+      if(message) return ;
+      
+      
+      
+      if(!isSignIn){
+     
       createUserWithEmailAndPassword(auth, email.current.value, password.current.value)
   .then((userCredential) => {
     // Signed up 
-    const user = userCredential.user;
-    // ...
+    // const user = userCredential.user;
+    
+    navigate("/");
+   
   })
   .catch((error) => {
     const errorCode = error.code;
@@ -37,7 +46,25 @@ const Login = () => {
     setErrMsg(errorMessage + errorCode)
   });
     
-     
+}
+else{
+  // sign in
+
+  signInWithEmailAndPassword(auth, email.current.value, password.current.value)
+.then((userCredential) => {
+  // Signed in 
+  const user = userCredential.user;
+  // ...
+  console.log(user)
+  navigate("/browser")
+})
+.catch((error) => {
+  const errorCode = error.code;
+  const errorMessage = error.message;
+  setErrMsg(errorMessage + errorCode)
+});
+}
+
     }
   return (
    <>
@@ -49,10 +76,12 @@ const Login = () => {
     </div>
     <form onSubmit={(e)=>e.preventDefault()} className='absolute w-3/12  p-12 my-36 mx-auto right-0 left-0    bg-black bg-opacity-80'>
         <div className=' text-white text-3xl font-bold '>{isSignIn ?"Sign In":"Sign Up "}</div>
+        {!isSignIn &&  <input   className="p-4 my-4 w-full font-bold bg-yellow-50" type='text' placeholder='Name'/> }
+       
         <input  ref={email} className="p-4 my-4 w-full font-bold bg-yellow-50" type='text' placeholder='email/phone'/>
         <input ref={password} className="p-2 w-full font-bold bg-yellow-50" type='password' placeholder='PaasWord'/>
 
-        <p className='text-red-700 p-4 my-4'>{errMes}</p>
+        <p className='text-red-700 p-2 '>{errMes}</p>
          <button className='p-4 my-4 w-full bg-red-700' onClick={handdleClickButton}>{isSignIn ?"Sign In":"Sign Up "}</button>
        
                  <p className='py-4  text-white cursor-pointer' onClick={toggleSignIn}>{isSignIn? "already Sign ! Explore more Netflix":" New to Netflix ? Sign Up Now"}</p>
