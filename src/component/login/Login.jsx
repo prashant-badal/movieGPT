@@ -31,7 +31,7 @@ const Login = () => {
 
     const handdleClickButton=()=>{
       const message =checkValidate(email.current.value,password.current.value);
-      console.log(message)
+     
       setErrMsg(message )
       // console.log(password.current.value)
       if(message) return ;

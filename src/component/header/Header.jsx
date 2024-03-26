@@ -48,7 +48,7 @@ useEffect(()=>{
   }
   return (
     <>
-    <div  className="absolute z-77 px-8 py-2 bg-gradient-to-b from-black z-10 w-full flex justify-between">
+    <div  className="absolute z-77 px-8 py-2 bg-gradient-to-b from-black z-10 w-full flex justify-between bg-opacity-50">
         <img className="w-44" src={img} alt='logo'/>
         
       
