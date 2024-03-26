@@ -1,21 +1,46 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import img from "../../asset/image/Netflix_Logo_PMS.png"
 
 import logo from '../../asset/image/signInLogo.png'
 import { auth } from '../utils/firebase'
 import { useNavigate } from 'react-router-dom'
-import { signOut } from 'firebase/auth'
-import { useSelector } from 'react-redux'
+import { onAuthStateChanged, signOut } from 'firebase/auth'
+import { useDispatch, useSelector } from 'react-redux'
 import { store } from '../utils/redux/appstore'
+import { addUser, removeUser } from '../utils/redux/slice/userSlice'
+import { LOGO_URL } from '../utils/constant/constant'
+
 
 const Header = () => {
   const navigate =useNavigate()
 const user= useSelector(store=>store.user)
 
+const dispatch=useDispatch();
+
+useEffect(()=>{
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      const {uid,email,displayName,photoURL}=user;
+      dispatch(addUser({
+        uid:uid,
+        email:email,
+        displayName:displayName,
+        photoURL:photoURL
+      }));
+      navigate('/browse')
+    
+    } else {
+      dispatch(removeUser());
+      navigate('/')
+    }
+  });
+},[])
+
+
   const handleSignOut=()=>{
     signOut(auth).then(() => {
       // Sign-out successful.
-      navigate('/')
+
     }).catch((error) => {
       // An error happened.
     });
@@ -27,7 +52,7 @@ const user= useSelector(store=>store.user)
         
       
       {user && 
-      <div className='flex'><img className="w-12 h-12 " src={logo} alt='logo'/>
+      <div className='flex'><img className="w-12 h-12 " src={LOGO_URL} alt='logo'/>
         <button  onClick={handleSignOut} className=' font-bold text-white'>sign Out</button>
         
       

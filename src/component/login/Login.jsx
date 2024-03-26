@@ -1,16 +1,25 @@
 import React, { useEffect, useRef, useState } from 'react'
 import Header from '../header/Header'
 import { checkValidate } from '../utils/validate';
-import {  createUserWithEmailAndPassword,signInWithEmailAndPassword } from "firebase/auth";
+import {  createUserWithEmailAndPassword,signInWithEmailAndPassword,updateProfile } from "firebase/auth";
 import {auth} from '../utils/firebase'
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { addUser } from '../utils/redux/slice/userSlice';
+import { LOGO_URL } from '../utils/constant/constant';
 
 const Login = () => {
+  const dispatch=useDispatch()
   const navigate=useNavigate();
   const [errMes,setErrMsg]=useState(null)
 
   const email=useRef(null);
-  const password=useRef(null)
+  const password=useRef(null);
+
+
+
+
+  const name=useRef(null)
     const [isSignIn ,setIsSignIn]=useState(true);
 
     const toggleSignIn =()=>{
@@ -34,9 +43,20 @@ const Login = () => {
       createUserWithEmailAndPassword(auth, email.current.value, password.current.value)
   .then((userCredential) => {
     // Signed up 
-    // const user = userCredential.user;
-    
-    navigate("/");
+    const user = userCredential.user;
+    updateProfile(auth.currentUser, {
+      displayName: name.current.value, photoURL: {LOGO_URL}
+    }).then(() => {
+      // Profile updated!
+      const {uid,email,displayName,photoURL}=auth.currentUser;
+      dispatch(addUser({uid:uid,email:email,displayName:displayName, photoURL:photoURL}));
+
+      // navigate('/')
+      // ...
+    }).catch((error) => {
+      // An error occurred
+      // ...
+    });
    
   })
   .catch((error) => {
@@ -45,6 +65,8 @@ const Login = () => {
     // ..
     setErrMsg(errorMessage + errorCode)
   });
+  
+  
     
 }
 else{
@@ -56,7 +78,7 @@ else{
   const user = userCredential.user;
   // ...
   console.log(user)
-  navigate("/browser")
+
 })
 .catch((error) => {
   const errorCode = error.code;
@@ -76,7 +98,8 @@ else{
     </div>
     <form onSubmit={(e)=>e.preventDefault()} className='absolute w-3/12  p-12 my-36 mx-auto right-0 left-0    bg-black bg-opacity-80'>
         <div className=' text-white text-3xl font-bold '>{isSignIn ?"Sign In":"Sign Up "}</div>
-        {!isSignIn &&  <input   className="p-4 my-4 w-full font-bold bg-yellow-50" type='text' placeholder='Name'/> }
+
+        {!isSignIn &&  <input ref={name}  className="p-4 my-4 w-full font-bold bg-yellow-50" type='text' placeholder='Name'/> }
        
         <input  ref={email} className="p-4 my-4 w-full font-bold bg-yellow-50" type='text' placeholder='email/phone'/>
         <input ref={password} className="p-2 w-full font-bold bg-yellow-50" type='password' placeholder='PaasWord'/>
