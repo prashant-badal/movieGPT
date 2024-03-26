@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react'
 import Header from '../header/Header'
 import useNowPlayingMovie from '../../hooks/useNowPlayingMovie'
+import MainContainer from '../mainContainer/MainContainer';
+import SecondaryContainer from '../secondaryContainer/SecondaryContainer';
 
 
 const Browse = () => {
@@ -14,6 +16,8 @@ useNowPlayingMovie();
     <h1 className='text-black font-bold text-4xl '>Work is in progress ..... </h1>
     </div>
      <Header/> 
+     <MainContainer/>
+     <SecondaryContainer/>
      
    
     
