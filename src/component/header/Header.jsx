@@ -8,7 +8,8 @@ import { onAuthStateChanged, signOut } from 'firebase/auth'
 import { useDispatch, useSelector } from 'react-redux'
 import { store } from '../utils/redux/appstore'
 import { addUser, removeUser } from '../utils/redux/slice/userSlice'
-import { LOGO_URL } from '../utils/constant/constant'
+import { SignLOGO_URL } from '../utils/constant/constant'
+
 
 
 const Header = () => {
@@ -52,7 +53,7 @@ useEffect(()=>{
         
       
       {user && 
-      <div className='flex'><img className="w-12 h-12 " src={LOGO_URL} alt='logo'/>
+      <div className='flex'><img className="w-12 h-12 " src={SignLOGO_URL} alt='logo'/>
         <button  onClick={handleSignOut} className=' font-bold text-white'>sign Out</button>
         
       

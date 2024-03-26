@@ -1,1 +1,9 @@
-export const LOGO_URL="https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.inuth.com%2Fphotos%2Fshah-rukh-khan-photos%2Finsta%2F&psig=AOvVaw375k94De19Ih2rmO_S0a7R&ust=1711548275720000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCPjW6KqMkoUDFQAAAAAdAAAAABAE"
+export const SignLOGO_URL="https://images.inuth.com/2017/05/1Shah-Rukh-Khan-shares-his-first-look-from-Anand-L-Rais-next.jpg"
+
+export const API_options = {
+    method: 'GET',
+    headers: {
+      accept: 'application/json',
+      Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJmZjRmMTk2MDBkNDYxMWIwYWM1MDU0ZmM3ZDMxZjNmMyIsInN1YiI6IjY2MDJkY2U0NjA2MjBhMDE3YzJmNDUzOCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.g03Mhx-4W3llCH3WRbcrGlU_6EjR38mN55qcvtle_3g'
+    }
+  };

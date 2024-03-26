@@ -6,7 +6,7 @@ import {auth} from '../utils/firebase'
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { addUser } from '../utils/redux/slice/userSlice';
-import { LOGO_URL } from '../utils/constant/constant';
+import { LOGO_URL, SignLOGO_URL } from '../utils/constant/constant';
 
 const Login = () => {
   const dispatch=useDispatch()
@@ -45,7 +45,7 @@ const Login = () => {
     // Signed up 
     const user = userCredential.user;
     updateProfile(auth.currentUser, {
-      displayName: name.current.value, photoURL: {LOGO_URL}
+      displayName: name.current.value, photoURL: SignLOGO_URL
     }).then(() => {
       // Profile updated!
       const {uid,email,displayName,photoURL}=auth.currentUser;

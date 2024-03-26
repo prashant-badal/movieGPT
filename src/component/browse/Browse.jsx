@@ -1,7 +1,10 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Header from '../header/Header'
+import useNowPlayingMovie from '../../hooks/useNowPlayingMovie'
+
 
 const Browse = () => {
+useNowPlayingMovie();
   return (
     <div >
       <div  className='m-10' >
