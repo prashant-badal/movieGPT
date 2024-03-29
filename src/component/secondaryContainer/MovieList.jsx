@@ -1,18 +1,28 @@
-import React from 'react'
+import React, { useState } from 'react'
 import MovieCard from './MovieCard'
 
 const MovieList = ({title, movies}) => {
-    console.log(movies)
+    console.log(movies);
+    
   return (
    <>
    <div>
-        <h1>{title}</h1>
+        
 
    </div>
-   {/* <div>
-   <MovieCard posterPath={movies[0]?.posterPath}/>
+   <div className='flex '>
+   <h1>{title}</h1>
+  
+   <div  className=' flex-wrap'>
+    {
+      movies.map(movie=>(
+        <MovieCard key={movie.id} posterPath={movie.poster_path}/>
+      ))
+    }
+
+
    </div>
-    <MovieCard/> */}
+   </div>
    
    </>
   )
