@@ -6,14 +6,15 @@ const MovieList = ({title, movies}) => {
     
   return (
    <>
-   <div>
-        
+   {movies &&
+   <div  className='px-6'>
+   <h1  className='text-3xl py-4 text-white'>{title}</h1>  
 
-   </div>
-   <div className='flex '>
-   <h1>{title}</h1>
+
+   <div className='flex  overflow-x-scroll px-3'>
+ 
   
-   <div  className=' flex-wrap'>
+   <div  className=' flex'>
     {
       movies.map(movie=>(
         <MovieCard key={movie.id} posterPath={movie.poster_path}/>
@@ -23,6 +24,8 @@ const MovieList = ({title, movies}) => {
 
    </div>
    </div>
+   </div>
+}
    
    </>
   )
