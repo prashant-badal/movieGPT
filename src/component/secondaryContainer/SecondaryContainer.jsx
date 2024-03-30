@@ -12,15 +12,14 @@ const SecondaryContainer = () => {
 
 
     <div  className='-mt-52 pl-6 relative z-12 '>
-    <MovieList title="Popular Movie" movies={movies?.popularMovie} />
+   
       <MovieList title="Now Playing" movies={movies?.nowPlayingMovie} />
-    
+      <MovieList title="Top Rated" movies={movies?.topMovie} />
       <MovieList title="Popular Movie" movies={movies?.popularMovie} />
-      {/* {console.log( "mpvies" ,movies.popularMovie)} */}
-      <MovieList title="title" movies={movies?.nowPlayingMovie} />
-      <MovieList title="title" movies={movies?.nowPlayingMovie} />
-      <MovieList title="title" movies={movies?.nowPlayingMovie} />
-      <MovieList title="title" movies={movies?.nowPlayingMovie} />
+ 
+     
+      <MovieList title="Up Coming" movies={movies?.upComingMovie} />
+      
       </div>
        </div>
     )

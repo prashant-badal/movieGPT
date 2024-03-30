@@ -6,7 +6,7 @@ import {auth} from '../utils/firebase'
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { addUser } from '../utils/redux/slice/userSlice';
-import { LOGO_URL, SignLOGO_URL } from '../utils/constant/constant';
+import { BG_URL, LOGO_URL, SignLOGO_URL } from '../utils/constant/constant';
 
 const Login = () => {
   const dispatch=useDispatch()
@@ -94,7 +94,7 @@ else{
 
     <Header/>
     <div className='absolute'>
-        <img src='https://assets.nflxext.com/ffe/siteui/vlv3/9d3533b2-0e2b-40b2-95e0-ecd7979cc88b/a3873901-5b7c-46eb-b9fa-12fea5197bd3/IN-en-20240311-popsignuptwoweeks-perspective_alpha_website_large.jpg' alt='backgroundImg'/>
+        <img src={BG_URL} alt='backgroundImg'/>
     </div>
     <form onSubmit={(e)=>e.preventDefault()} className='absolute w-3/12  p-12 my-36 mx-auto right-0 left-0    bg-black bg-opacity-80'>
         <div className=' text-white text-3xl font-bold '>{isSignIn ?"Sign In":"Sign Up "}</div>
